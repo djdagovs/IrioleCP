@@ -8,3 +8,16 @@ It's a rewrite of it's older brother which was written in CodeIgniter - however 
 
 Not really sure what the requirements or dependencies are just yet - this is the first commit after all...
 The first few commits will be the server side setup, and will probably just download any PHP files using WGET. We'll see.
+
+---
+
+## Setup Guide
+
+**Install wget:**
+`yum -y install wget`
+
+**Change permissions:**
+`chmod +x iriolecp.sh`
+
+**Run the file:**
+`./iriolecp.sh`
