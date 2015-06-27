@@ -61,13 +61,13 @@ jumpto $installphp
 echo "Installing PHP ..."
 sleep 3
 yum -y install php php-mysql
-goto $installingbinddns
+jumpto $installingbinddns
 
 installingbinddns:
 echo "Installing DNS ..."
 sleep 3
 yum -y install bind bind-utils
-goto $configurebinddns
+jumpto $configurebinddns
 
 configurebinddns:
 echo "Auto conigure of BIND DNS not written yet."
@@ -78,7 +78,7 @@ echo "Setting up the BIND chroot environment ..."
 sleep 3
 yum -y install bind-chroot
 service named restart
-goto $startiriolecp
+jumpto $startiriolecp
 
 startiriolecp:
 if (( $(ps -ef | grep -v grep | grep httpd | wc -1) > 0 ))
