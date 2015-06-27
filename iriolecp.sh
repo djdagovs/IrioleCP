@@ -17,6 +17,7 @@ configuremysql=${5:-"configuremysql"}
 installphp=${6:-"installphp"}
 installingbinddns=${7:-"installingbinddns"}
 configurebinddns=${8:-"configurebinddns"}
+downloadiriolecpfiles=${8:-"downloadiriolecpfiles"}
 startiriolecp=${9:-"startiriolecp"}
 
 jumpto $start
@@ -58,6 +59,8 @@ service mysqld start
 /usr/bin/mysql_secure_installation
 service mysqld stop
 jumpto $installphp
+
+installphp:
 echo "Installing PHP ..."
 sleep 3
 yum -y install php php-mysql
@@ -78,18 +81,23 @@ echo "Setting up the BIND chroot environment ..."
 sleep 3
 yum -y install bind-chroot
 service named restart
+jumpto $downloadiriolecpfiles
+
+downloadiriolecpfiles:
+wget -P /var/www/html/ https://cdn.rawgit.com/richardhedges/IrioleCP/tree/master/iriolecp/cp
 jumpto $startiriolecp
 
 startiriolecp:
-if (( $(ps -ef | grep -v grep | grep httpd | wc -1) > 0 ))
-then
-	echo "Apache service already running ..."
-else
+# if (( $(ps -ef | grep -v grep | grep httpd | wc -l) > 0 ))
+# if (( $(ps -ef | grep -v grep | grep httpd | wc -1) > 0 ))
+# then
+	# echo "Apache service already running ..."
+# else
 	service httpd start
-fi
-if (( $(ps -ef | grep -v grep | grep mysqld | wc -1) > 0 ))
-then
-	echo "MySQL service already running ..."
-else
+# fi
+# if (( $(ps -ef | grep -v grep | grep mysqld | wc -1) > 0 ))
+# then
+	# echo "MySQL service already running ..."
+# else
 	service mysqld start
-fi
+# fi
