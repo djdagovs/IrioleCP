@@ -89,7 +89,7 @@ unzip /var/www/html/master.zip -d /var/www/html/
 rm -rf /var/www/html/LICENSE
 rm -rf /var/www/html/README.md
 rm -rf /var/www/html/iriolecp.sh
-mv /var/www/html/cp/* /var/www/html/
+mv /var/www/html/IrioleCP-master/iriolecp/cp/* /var/www/html/
 rm -rf /var/www/html/cp
 jumpto $startiriolecp
 
