@@ -84,7 +84,14 @@ service named restart
 jumpto $downloadiriolecpfiles
 
 downloadiriolecpfiles:
-wget -P /var/www/html/ https://cdn.rawgit.com/richardhedges/IrioleCP/tree/master/iriolecp/cp
+yum -y install unzip
+wget -P /var/www/html/ https://github.com/richardhedges/IrioleCP/archive/master.zip
+unzip /var/www/html/master.zip
+rm -rf /var/www/html/LICENSE
+rm -rf /var/www/html/README.md
+rm -rf /var/www/html/iriolecp.sh
+mv /var/www/html/cp/* /var/www/html/
+rm -rf /var/www/html/cp
 jumpto $startiriolecp
 
 startiriolecp:
