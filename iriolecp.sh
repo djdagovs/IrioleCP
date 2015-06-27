@@ -10,14 +10,14 @@ function jumpto
 }
 
 start=${1:-"start"}
-startinstall=${1:-"startinstall"}
-installapache=${1:-"installapache"}
-installmysql=${1:-"installmysql"}
-configuremysql=${1:-"configuremysql"}
-installphp=${1:-"installphp"}
-installingbinddns=${1:-"installingbinddns"}
-configurebinddns=${1:-"configurebinddns"}
-startiriolecp=${1:-"startiriolecp"}
+startinstall=${2:-"startinstall"}
+installapache=${3:-"installapache"}
+installmysql=${4:-"installmysql"}
+configuremysql=${5:-"configuremysql"}
+installphp=${6:-"installphp"}
+installingbinddns=${7:-"installingbinddns"}
+configurebinddns=${8:-"configurebinddns"}
+startiriolecp=${9:-"startiriolecp"}
 
 jumpto $start
 
@@ -35,47 +35,47 @@ fi
 
 startinstall:
 echo "Updating packages ..."
-pause 3
+sleep 3
 yum -y update
 jumpto $installapache
 
 installapache:
 echo "Installing Apache ..."
-pause 3
+sleep 3
 yum -y install httpd
 jumpto $installmysql
 
 installmysql:
 echo "Installing MySQL ..."
-pause 3
+sleep 3
 yum -y install mysql-server
 jumpto $configuremysql
 
 configuremysql:
 echo "Now to configure MySQL - you'll need to do a bit of input for this step!"
-pause 3
+sleep 3
 service mysqld start
 /usr/bin/mysql_secure_installation
 service mysqld stop
 jumpto $installphp
 echo "Installing PHP ..."
-pause 3
+sleep 3
 yum -y nistall php php-mysql
 goto $installingbinddns
 
 installingbinddns:
 echo "Installing DNS ..."
-pause 3
+sleep 3
 yum -y install bind bind-utils
 goto $configurebinddns
 
 configurebinddns:
 echo "Auto conigure of BIND DNS not written yet."
-pause 1
+sleep 1
 echo "Visit https://goo.gl/YVaJ5r for more information on how to configure BIND DNS"
-pause 3
+sleep 3
 echo "Setting up the BIND chroot environment ..."
-pause 3
+sleep 3
 yum -y install bind-chroot
 service named restart
 goto $startiriolecp
