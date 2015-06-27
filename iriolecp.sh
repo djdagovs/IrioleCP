@@ -60,7 +60,7 @@ service mysqld stop
 jumpto $installphp
 echo "Installing PHP ..."
 sleep 3
-yum -y nistall php php-mysql
+yum -y install php php-mysql
 goto $installingbinddns
 
 installingbinddns:
