@@ -25,7 +25,6 @@ jumpto $start
 start:
 echo "Welcome to the IrioleCP setup script"
 read -p "Would you like to install IrioleCP? (y/n)" CONT
-echo
 if [ "$CONT" == "y" ];
 then
 	jumpto startinstall
@@ -86,7 +85,7 @@ jumpto $downloadiriolecpfiles
 downloadiriolecpfiles:
 yum -y install unzip
 wget -P /var/www/html/ https://github.com/richardhedges/IrioleCP/archive/master.zip
-unzip /var/www/html/master.zip
+unzip /var/www/html/master.zip -d /var/www/html/
 rm -rf /var/www/html/LICENSE
 rm -rf /var/www/html/README.md
 rm -rf /var/www/html/iriolecp.sh
